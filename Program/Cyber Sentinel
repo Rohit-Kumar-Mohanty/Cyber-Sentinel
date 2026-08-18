@@ -1,1 +1,489 @@
-PDF
+try:
+    import customtkinter as ctk # type: ignore
+except ImportError:
+    raise ImportError("customtkinter is not installed. Install it using: pip install customtkinter")
+import random
+import time
+import threading
+
+# -------------------- APP SETTINGS --------------------
+
+ctk.set_appearance_mode("dark")
+ctk.set_default_color_theme("dark-blue")
+
+app = ctk.CTk()
+app.title("CYBER SENTINEL | Cyber Defense System")
+app.geometry("1200x750")
+app.minsize(1000, 650)
+
+# -------------------- VARIABLES --------------------
+
+threat_score = 78
+incident_count = 27
+attack_active = False
+
+# -------------------- COLORS --------------------
+
+BG = "#080b12"
+PANEL = "#101722"
+RED = "#ff304f"
+CYAN = "#00e5ff"
+GREEN = "#00ff88"
+YELLOW = "#ffd43b"
+WHITE = "#f5f7fa"
+GREY = "#8993a4"
+
+# -------------------- FUNCTIONS --------------------
+
+def add_log(message, color=WHITE):
+    log_box.configure(state="normal")
+    log_box.insert("end", f"  {message}\n", "normal")
+    log_box.tag_config("normal", foreground=color)
+    log_box.configure(state="disabled")
+    log_box.see("end")
+
+
+def clear_log():
+    log_box.configure(state="normal")
+    log_box.delete("1.0", "end")
+    log_box.configure(state="disabled")
+
+
+def update_status(text, color=CYAN):
+    status_label.configure(text=text, text_color=color)
+
+
+def step1_monitor():
+    clear_log()
+    update_status("● MONITORING LOCAL THREAT ENVIRONMENT", CYAN)
+
+    add_log("[STEP 1] Starting local threat monitoring...", CYAN)
+
+    def process():
+        locations = [
+            "Bhubaneswar - Zone 01",
+            "Bhubaneswar - Zone 02",
+            "Bhubaneswar - Zone 03",
+            "Bhubaneswar - Zone 04"
+        ]
+
+        for location in locations:
+            time.sleep(0.6)
+            add_log(f"✓ Analyzing {location}", GREEN)
+
+        time.sleep(0.5)
+
+        add_log("✓ Financial Fraud incidents : 12", YELLOW)
+        add_log("✓ Phishing incidents        : 08", YELLOW)
+        add_log("✓ Identity Theft incidents  : 04", YELLOW)
+        add_log("✓ Malware incidents         : 03", YELLOW)
+
+        time.sleep(0.5)
+
+        add_log("✓ Local threat database synchronized", GREEN)
+        add_log("✓ Threat Intelligence loaded", GREEN)
+
+        update_status("● LOCAL MONITORING ACTIVE", GREEN)
+
+    threading.Thread(target=process, daemon=True).start()
+
+
+def step2_detect():
+    clear_log()
+    update_status("● ANALYZING CYBER ACTIVITY", YELLOW)
+
+    add_log("[STEP 2] Threat detection engine started...", CYAN)
+
+    def process():
+        events = [
+            "Analyzing transaction patterns...",
+            "Analyzing login behavior...",
+            "Checking suspicious indicators...",
+            "Calculating threat score...",
+            "Comparing attack signatures..."
+        ]
+
+        for event in events:
+            time.sleep(0.7)
+            add_log("→ " + event, WHITE)
+
+        time.sleep(0.5)
+
+        add_log("⚠ Abnormal transaction pattern detected", YELLOW)
+        add_log("⚠ Multiple suspicious indicators found", YELLOW)
+
+        time.sleep(0.5)
+
+        add_log("🚨 CYBERATTACK DETECTED", RED)
+        add_log("Attack Type : FINANCIAL FRAUD", RED)
+        add_log("Amount      : ₹25,000", RED)
+        add_log("Risk Level  : CRITICAL", RED)
+        add_log("Confidence  : 94%", RED)
+
+        update_status("● THREAT DETECTED | CRITICAL", RED)
+
+    threading.Thread(target=process, daemon=True).start()
+
+
+def step3_defense():
+    clear_log()
+    update_status("● DEFENSE PROTOCOL ACTIVE", CYAN)
+
+    add_log("[STEP 3] Activating defensive response...", CYAN)
+
+    def process():
+        actions = [
+            "Identifying affected transaction...",
+            "Flagging suspicious transaction...",
+            "Isolating simulated threat...",
+            "Preserving digital evidence...",
+            "Generating incident ID...",
+            "Preparing fraud recovery workflow..."
+        ]
+
+        for action in actions:
+            time.sleep(0.7)
+            add_log("→ " + action, WHITE)
+
+        time.sleep(0.5)
+
+        add_log("✓ Transaction flagged", GREEN)
+        add_log("✓ Threat isolated", GREEN)
+        add_log("✓ Evidence preserved", GREEN)
+        add_log("✓ Recovery workflow initiated", GREEN)
+
+        time.sleep(0.5)
+
+        add_log("💰 RECOVERY RESPONSE STATUS: INITIATED", CYAN)
+        add_log("⚠ Contact official financial-fraud response channels", YELLOW)
+
+        update_status("● DEFENSE SUCCESSFUL", GREEN)
+
+    threading.Thread(target=process, daemon=True).start()
+
+
+def step4_counter_response():
+    clear_log()
+    update_status("● ETHICAL COUNTER-RESPONSE ACTIVE", RED)
+
+    add_log("[STEP 4] Defense failure detected...", RED)
+
+    def process():
+        actions = [
+            "Threat remains active in simulation...",
+            "Activating controlled honeypot...",
+            "Monitoring simulated attacker behavior...",
+            "Collecting Indicators of Compromise...",
+            "Analyzing attack pattern...",
+            "Generating forensic evidence..."
+        ]
+
+        for action in actions:
+            time.sleep(0.8)
+            add_log("→ " + action, WHITE)
+
+        time.sleep(0.5)
+
+        add_log("🍯 HONEYPOT ACTIVATED", CYAN)
+        add_log("✓ Suspicious activity captured", GREEN)
+        add_log("✓ Attack behavior recorded", GREEN)
+        add_log("✓ Indicators extracted", GREEN)
+        add_log("✓ Evidence package generated", GREEN)
+
+        time.sleep(0.5)
+
+        add_log("🛡️ THREAT CONTAINED", GREEN)
+        add_log("⚠ No real external system was attacked", YELLOW)
+
+        update_status("● COUNTER-RESPONSE COMPLETE", GREEN)
+
+    threading.Thread(target=process, daemon=True).start()
+
+
+def full_simulation():
+    clear_log()
+    update_status("● FULL CYBER ATTACK SIMULATION", RED)
+
+    def process():
+
+        # STEP 1
+        add_log("════════ STEP 1: LOCAL MONITORING ════════", CYAN)
+        time.sleep(1)
+
+        add_log("📍 Location: BHUBANESWAR", WHITE)
+        add_log("✓ Local threat intelligence loaded", GREEN)
+        add_log("✓ Threat map synchronized", GREEN)
+
+        time.sleep(1)
+
+        # STEP 2
+        add_log("\n════════ STEP 2: ATTACK DETECTION ════════", CYAN)
+        time.sleep(1)
+
+        add_log("⚠ Suspicious financial activity detected", YELLOW)
+        time.sleep(0.8)
+
+        add_log("🚨 FINANCIAL FRAUD CONFIRMED", RED)
+        add_log("Amount: ₹25,000", RED)
+        add_log("Risk: CRITICAL", RED)
+
+        time.sleep(1)
+
+        # STEP 3
+        add_log("\n════════ STEP 3: DEFENSE ════════", CYAN)
+        time.sleep(1)
+
+        add_log("→ Flagging transaction...", WHITE)
+        time.sleep(0.7)
+
+        add_log("✓ Threat isolated", GREEN)
+        time.sleep(0.7)
+
+        add_log("✓ Evidence preserved", GREEN)
+        time.sleep(0.7)
+
+        add_log("✓ Recovery workflow initiated", GREEN)
+
+        time.sleep(1)
+
+        # Simulated defense failure
+        add_log("\n⚠ DEFENSE BYPASS DETECTED", RED)
+        time.sleep(1)
+
+        # STEP 4
+        add_log("\n════════ STEP 4: COUNTER-RESPONSE ════════", CYAN)
+        time.sleep(1)
+
+        add_log("🍯 Activating controlled honeypot...", CYAN)
+        time.sleep(0.8)
+
+        add_log("✓ Attacker behavior captured", GREEN)
+        time.sleep(0.7)
+
+        add_log("✓ Indicators of Compromise extracted", GREEN)
+        time.sleep(0.7)
+
+        add_log("✓ Forensic evidence preserved", GREEN)
+        time.sleep(0.7)
+
+        add_log("✓ Threat contained", GREEN)
+
+        time.sleep(1)
+
+        add_log("\n════════ FINAL REPORT ════════", CYAN)
+        add_log("Incident ID       : CS-84921", WHITE)
+        add_log("Attack Type       : FINANCIAL FRAUD", WHITE)
+        add_log("Threat Level      : CRITICAL", RED)
+        add_log("Detection         : 94%", WHITE)
+        add_log("Defense           : ATTEMPTED", WHITE)
+        add_log("Counter Response  : SUCCESSFUL", GREEN)
+        add_log("Evidence          : PRESERVED", GREEN)
+        add_log("Final Status      : THREAT CONTAINED", GREEN)
+
+        update_status("● SYSTEM SECURED | THREAT CONTAINED", GREEN)
+
+    threading.Thread(target=process, daemon=True).start()
+
+
+# -------------------- HEADER --------------------
+
+header = ctk.CTkFrame(
+    app,
+    fg_color=PANEL,
+    corner_radius=0,
+    height=90
+)
+header.pack(fill="x")
+
+title = ctk.CTkLabel(
+    header,
+    text="🛡  CYBER SENTINEL",
+    font=("Arial", 30, "bold"),
+    text_color=CYAN
+)
+title.pack(side="left", padx=30, pady=(15, 0))
+
+subtitle = ctk.CTkLabel(
+    header,
+    text="LOCAL CYBER DEFENSE & FRAUD RESPONSE SYSTEM",
+    font=("Arial", 13),
+    text_color=GREY
+)
+subtitle.place(x=33, y=58)
+
+status_label = ctk.CTkLabel(
+    header,
+    text="● SYSTEM READY",
+    font=("Arial", 15, "bold"),
+    text_color=GREEN
+)
+status_label.pack(side="right", padx=30)
+
+# -------------------- LEFT PANEL --------------------
+
+left_panel = ctk.CTkFrame(
+    app,
+    width=280,
+    fg_color=PANEL,
+    corner_radius=12
+)
+left_panel.pack(
+    side="left",
+    fill="y",
+    padx=(20, 10),
+    pady=20
+)
+
+menu_title = ctk.CTkLabel(
+    left_panel,
+    text="CONTROL CENTER",
+    font=("Arial", 18, "bold"),
+    text_color=WHITE
+)
+menu_title.pack(pady=(25, 20))
+
+buttons = [
+    ("📍  STEP 1  |  MONITOR", step1_monitor, CYAN),
+    ("🚨  STEP 2  |  DETECT", step2_detect, RED),
+    ("🛡  STEP 3  |  DEFEND", step3_defense, GREEN),
+    ("⚔  STEP 4  |  COUNTER", step4_counter_response, YELLOW),
+]
+
+for text, command, color in buttons:
+    button = ctk.CTkButton(
+        left_panel,
+        text=text,
+        command=command,
+        height=50,
+        corner_radius=8,
+        fg_color="#182230",
+        hover_color="#253447",
+        text_color=color,
+        font=("Arial", 13, "bold")
+    )
+    button.pack(fill="x", padx=20, pady=8)
+
+simulation_button = ctk.CTkButton(
+    left_panel,
+    text="▶  RUN FULL SIMULATION",
+    command=full_simulation,
+    height=55,
+    corner_radius=10,
+    fg_color=RED,
+    hover_color="#ff5068",
+    text_color="white",
+    font=("Arial", 14, "bold")
+)
+simulation_button.pack(fill="x", padx=20, pady=(35, 10))
+
+reset_button = ctk.CTkButton(
+    left_panel,
+    text="↻  RESET",
+    command=clear_log,
+    height=40,
+    corner_radius=8,
+    fg_color="#182230",
+    hover_color="#253447",
+    font=("Arial", 12)
+)
+reset_button.pack(fill="x", padx=20, pady=5)
+
+# -------------------- MAIN AREA --------------------
+
+main = ctk.CTkFrame(
+    app,
+    fg_color=BG,
+    corner_radius=0
+)
+main.pack(
+    side="right",
+    fill="both",
+    expand=True,
+    padx=(10, 20),
+    pady=20
+)
+
+# Dashboard cards
+cards = ctk.CTkFrame(
+    main,
+    fg_color=BG
+)
+cards.pack(fill="x", pady=(0, 15))
+
+def create_card(parent, title_text, value_text, color):
+    card = ctk.CTkFrame(
+        parent,
+        fg_color=PANEL,
+        corner_radius=10
+    )
+    card.pack(side="left", fill="both", expand=True, padx=5)
+
+    ctk.CTkLabel(
+        card,
+        text=title_text,
+        font=("Arial", 12),
+        text_color=GREY
+    ).pack(pady=(15, 3))
+
+    ctk.CTkLabel(
+        card,
+        text=value_text,
+        font=("Arial", 25, "bold"),
+        text_color=color
+    ).pack(pady=(0, 15))
+
+    return card
+
+
+create_card(cards, "THREAT INDEX", "78 / 100", RED)
+create_card(cards, "INCIDENTS", "27", YELLOW)
+create_card(cards, "BLOCKED", "19", GREEN)
+create_card(cards, "SECURITY", "94%", CYAN)
+
+# -------------------- LOG PANEL --------------------
+
+log_frame = ctk.CTkFrame(
+    main,
+    fg_color=PANEL,
+    corner_radius=12
+)
+log_frame.pack(fill="both", expand=True)
+
+ctk.CTkLabel(
+    log_frame,
+    text="LIVE SECURITY EVENT CONSOLE",
+    font=("Arial", 17, "bold"),
+    text_color=CYAN
+).pack(anchor="w", padx=20, pady=(18, 8))
+
+log_box = ctk.CTkTextbox(
+    log_frame,
+    fg_color="#05080d",
+    text_color=WHITE,
+    font=("Consolas", 13),
+    corner_radius=8
+)
+log_box.pack(
+    fill="both",
+    expand=True,
+    padx=20,
+    pady=(0, 20)
+)
+
+log_box.insert(
+    "end",
+    "  CYBER SENTINEL SYSTEM INITIALIZED\n"
+    "  Security engine: ONLINE\n"
+    "  Threat intelligence: READY\n"
+    "  Defense engine: READY\n"
+    "  Counter-response sandbox: READY\n\n"
+    "  Select a step or run the full simulation...\n"
+)
+
+log_box.configure(state="disabled")
+
+# -------------------- START APP --------------------
+
+app.mainloop()
+
+
